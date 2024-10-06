@@ -35,8 +35,8 @@ var planetDetails = [
 // GLOBAL VARS
 // ------------------------
 
-var camera, controls, scene, renderer, cube, sphere, line, celestialBody, lookAtVector;
-var moon;
+var camera, controls, scene, renderer, cube, line, celestialBody, lookAtVector;
+var moon, sun;
 
 var nbrOfPlanet = 1;
 
@@ -116,8 +116,8 @@ function init() {
     wireframe: false,
   });
 
-  sphere = new THREE.Mesh(geometry, material);
-  scene.add(sphere);
+  sun = new THREE.Mesh(geometry, material);
+  scene.add(sun);
 
   // Add a point light to the scene (currently has no visible effect)
   var light = new THREE.PointLight(0xff0000, 1, 100);
@@ -177,6 +177,11 @@ function animateMoon() {
   moon.position.z = z + moonOrbitRadius * Math.sin(time * moonSpeed);  
 }
 
+function animateSun() {
+  // Rotate the Sun around its Y-axis (or any axis you'd like)
+  sun.rotation.y += 0.001; // Adjust the speed of rotation
+}
+
 // ------------------------
 // FUNC RENDER
 // ------------------------
@@ -223,7 +228,9 @@ function animate() {
   // Update object positions
   updatePosition();
   // Call the moon animation
-  animateMoon();  
+  animateMoon();
+  // Call the sun animation  
+  animateSun();
 }
 
 // ------------------------
