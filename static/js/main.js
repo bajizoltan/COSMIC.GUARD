@@ -1,17 +1,62 @@
+var planetDetails = [
+  {
+    name: "Earth",
+    diameter: "12,742 km",
+    distanceFromSun: "149.6 million km",
+    description: "Earth is the third planet from the Sun and the only astronomical object known to harbor life."
+  },
+  {
+    name: "Mars",
+    diameter: "6,779 km",
+    distanceFromSun: "227.9 million km",
+    description: "Mars is the fourth planet from the Sun and is often called the 'Red Planet' due to its reddish appearance."
+  },
+  {
+    name: "Mercury",
+    diameter: "4,880 km",
+    distanceFromSun: "57.9 million km",
+    description: "Mercury is the smallest planet in our solar system and the closest to the Sun."
+  },
+  {
+    name: "Venus",
+    diameter: "12,104 km",
+    distanceFromSun: "108.2 million km",
+    description: "Venus is the second planet from the Sun and has a thick, toxic atmosphere."
+  },
+  {
+    name: "Sun",
+    diameter: "1.39 million km",
+    distanceFromSun: "0 km", 
+    description: "The Sun is the star at the center of our solar system. It is a nearly perfect sphere of hot plasma, providing the energy that powers life on Earth. The Sun contains 99.86% of the total mass of the solar system."
+  }
+];
+
 // ------------------------
 // GLOBAL VARS
 // ------------------------
 
-var camera, controls, scene, renderer, cube, sphere, line, celestialBody;
+var camera, controls, scene, renderer, cube, sphere, line, celestialBody, lookAtVector;
+
+var nbrOfPlanet = 1;
 
 // Names of the celestial objects (Earth, Mars, Mercury, Venus)
 var objNames = ["Earth_Orbit", "Mars_orbit", "Mercury_Orbit", "Venus_Orbit"];
 
+// Textures of the celestial objects
+// From https://www.solarsystemscope.com/textures/
+var objTextures = [
+  "static/img/earth_suface.jpg", 
+  "static/img/mars_surface.jpg", 
+  "static/img/mercury_surface.jpg", 
+  "static/img/venus_surface.jpg"];
+
 // Sizes of the objects (corresponding to planets)
 var objSizes = [0.2, 0.17, 0.07, 0.2];
 
+
 // Colors for each celestial body (hexadecimal format)
 var objColors = [0x0066ff, 0xcc3333, 0xff0000, 0xffffff];
+
 
 // Array to store trajectory information for heavenly bodies
 var heavenlyBodies = [];
@@ -28,14 +73,19 @@ function init() {
     1000
   );
 
+  lookAtVector = new THREE.Vector3(0,0,0);
+  camera.lookAt(lookAtVector);
+
+  var textureLoader = new THREE.TextureLoader();
+
   // Add trackball controls to enable interactive scene manipulation (rotate, zoom, pan)
   controls = new THREE.TrackballControls(camera);
   controls.rotateSpeed = 1.0;
   controls.zoomSpeed = 1.2;
   controls.panSpeed = 0.8;
-  controls.noZoom = false;
+  controls.noZoom = true;
   controls.noPan = false;
-  controls.staticMoving = true;
+  controls.staticMoving = false;
   controls.dynamicDampingFactor = 0.3;
   controls.keys = [65, 83, 68];
   controls.addEventListener("change", render);
@@ -48,16 +98,21 @@ function init() {
   renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
 
   // Append the renderer's DOM element to the document (so it appears on the webpage)
-  document.body.appendChild(renderer.domElement);
+
+  var container = document.getElementById('scene-container');
+  container.appendChild(renderer.domElement);  
+  //document.body.appendChild(renderer.domElement);
 
   var j = 0;
 
   // Create the Sun (a yellow sphere) and add it to the scene
   var geometry = new THREE.SphereGeometry(0.6, 16, 16);
   var material = new THREE.MeshBasicMaterial({
+    map: textureLoader.load("static/img/sun_surface.jpg"),  // Apply the texture
     color: 0xffff00,
     wireframe: false,
   });
+
   sphere = new THREE.Mesh(geometry, material);
   scene.add(sphere);
 
@@ -67,9 +122,12 @@ function init() {
   scene.add(light);
 
   // Add celestial bodies (planets) to the scene
+
   for (var i = 0; i < 4; i++) {
+    mytexture = textureLoader.load(objTextures[j]);
     geometry = new THREE.SphereGeometry(objSizes[j], 16, 16);
     material = new THREE.MeshBasicMaterial({
+      map: mytexture,  // Apply the texture
       color: objColors[j],
       wireframe: false,
     });
@@ -91,10 +149,33 @@ function render() {
   // Continuously call render for each frame
   requestAnimationFrame(render);
 
+  if (nbrOfPlanet >= 0 && nbrOfPlanet < heavenlyBodies.length) 
+  {
+    var hbTAnomoly = heavenlyBodies[nbrOfPlanet].trueAnomoly;
+    currentPosition = heavenlyBodies[nbrOfPlanet].propagate(hbTAnomoly) ;  // Determine the current position.  
+  
+    var x = currentPosition[0] ;
+    var y = currentPosition[1] ;
+    var z = currentPosition[2] ;
+    var hBName = heavenlyBodies[nbrOfPlanet].name;  
+  
+    lookAtVector.set(x,y,z);    
+  }
+  else
+  {
+    lookAtVector.set(0,0,0);  
+    console.log("SetSun")
+  }
+
+  camera.lookAt(lookAtVector); // Set look at coordinate like this
+
+  //console.log(hBName, currentPosition);
+
   // Render the scene from the perspective of the camera
   renderer.render(scene, camera);
 }
 
+var i = 0;
 // ------------------------
 // FUNC ANIMATE
 // ------------------------
@@ -106,6 +187,7 @@ function animate() {
   controls.update();
   // Update object positions
   updatePosition();
+
 }
 
 // ------------------------
@@ -154,19 +236,42 @@ function get_datablock() {
       heavenlyBodies.push(celestialBody);
 
       // Populate the table with data for the celestial body
-      populate_table(
-        i,
-        field.name.value,
-        field.argPerigee.value,
-        field.meanAnomoly.value,
-        field.eccentricity.value,
-        field.inclination.value,
-        field.semiMajorAxis.value,
-        field.raan.value,
-        field.sidereal.value
-      );
+      // populate_table(
+      //   i,
+      //   field.name.value,
+      //   field.argPerigee.value,
+      //   field.meanAnomoly.value,
+      //   field.eccentricity.value,
+      //   field.inclination.value,
+      //   field.semiMajorAxis.value,
+      //   field.raan.value,
+      //   field.sidereal.value
+      // );
     }
   }
+}
+
+function changePlanet(planetIndex) {
+    
+    if (planetIndex >= 0 && planetIndex < planetDetails.length) {
+      nbrOfPlanet = planetIndex;
+      console.log("Changed planet to: " + planetDetails[planetIndex].name);
+  
+      // Kiválasztott bolygó információinak kiírása a HTML-be
+      var planet = planetDetails[planetIndex];
+      var infoDiv = document.getElementById('planetInfo');
+      infoDiv.innerHTML = `
+        <h2>${planet.name}</h2>
+        <p><strong>Diameter:</strong> ${planet.diameter}</p>
+        <p><strong>Distance from Sun:</strong> ${planet.distanceFromSun}</p>
+        <p><strong>Description:</strong> ${planet.description}</p>
+      `;
+    } else {
+      // Ha érvénytelen az index, a Nap (utolsó elem) lesz beállítva
+      console.log("Invalid planet index: " + planetIndex + ". Defaulting to Sun.");
+      nbrOfPlanet = planetDetails.length - 1; // A Nap indexe az utolsó
+      changePlanet(nbrOfPlanet); // Hívjuk meg újra a changePlanet függvényt a Nap indexével
+    }    
 }
 
 // STEP1: Call initialization and start the animation
@@ -177,3 +282,5 @@ get_datablock();
 traceOrbits();
 // STEP4: Start the animation loop
 animate();
+
+changePlanet(5);
