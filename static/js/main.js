@@ -164,6 +164,7 @@ function animateMoon() {
   // Continuously update the Moon's position to create an orbit
   var time = Date.now() * 0.001; // Incremental time for animation
 
+  // Get Earth positions
   var hbTAnomoly = heavenlyBodies[0].trueAnomoly;
   currentPosition = heavenlyBodies[0].propagate(hbTAnomoly) ;  // Determine the current position.  
 
