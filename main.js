@@ -100,16 +100,23 @@ function render() {
   // Continuously call render for each frame
   requestAnimationFrame(render);
 
-  var hbTAnomoly = heavenlyBodies[nbrOfPlanet].trueAnomoly ;
-  currentPosition = heavenlyBodies[nbrOfPlanet].propagate(hbTAnomoly) ;  // Determine the current position.  
+  if (nbrOfPlanet >= 0 && nbrOfPlanet < heavenlyBodies.length) 
+  {
+    var hbTAnomoly = heavenlyBodies[nbrOfPlanet].trueAnomoly;
+    currentPosition = heavenlyBodies[nbrOfPlanet].propagate(hbTAnomoly) ;  // Determine the current position.  
   
-
-  var x = currentPosition[0] ;
-  var y = currentPosition[1] ;
-  var z = currentPosition[2] ;
-  var hBName = heavenlyBodies[nbrOfPlanet].name;  
-
-  lookAtVector.set(x,y,z);
+    var x = currentPosition[0] ;
+    var y = currentPosition[1] ;
+    var z = currentPosition[2] ;
+    var hBName = heavenlyBodies[nbrOfPlanet].name;  
+  
+    lookAtVector.set(x,y,z);    
+  }
+  else
+  {
+    lookAtVector.set(0,0,0);  
+    console.log("SetSun")
+  }
 
   camera.lookAt(lookAtVector); // Set look at coordinate like this
 
@@ -193,6 +200,11 @@ function get_datablock() {
       );
     }
   }
+}
+
+function changePlanet(planetIndex) {
+  nbrOfPlanet = planetIndex;
+  console.log("Changed planet to: " + objNames[planetIndex]);
 }
 
 // STEP1: Call initialization and start the animation
