@@ -131,7 +131,7 @@ function updatePosition()
 		curObj = scene.getObjectByName(hBName) ;
 		curObj.position.set (Xpos, Ypos, Zpos) ;
 		
-	//	console.log(curObj.name + "  " + curObj.position.x + ",  " + curObj.position.y + ",  " + curObj.position.z  ) ;
+		// console.log(curObj.name + "  " + curObj.position.x + ",  " + curObj.position.y + ",  " + curObj.position.z  ) ;
 		  
 	 // Calculate mean motion n:
 		 var n = (2 * Math.PI) / (heavenlyBodies[hB].period * 365.25) ;   // radians per day

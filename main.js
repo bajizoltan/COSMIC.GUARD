@@ -2,23 +2,21 @@
 // GLOBAL VARS
 // ------------------------
 
-var camera, controls, scene, renderer, cube, sphere, line, celestialBody;
+var camera, controls, scene, renderer, cube, sphere, line, celestialBody, lookAtVector;
+
+var nbrOfPlanet = 1;
 
 // Names of the celestial objects (Earth, Mars, Mercury, Venus)
-// original
- var objNames = ["Earth_Orbit", "Mars_orbit", "Mercury_Orbit", "Venus_Orbit"];
+var objNames = ["Earth_Orbit", "Mars_orbit", "Mercury_Orbit", "Venus_Orbit"];
 
-//var objNames = ["Moon_Orbit", "Comet_orbit", "Asteroid_Orbit"];
 
 // Sizes of the objects (corresponding to planets)
-// original 
- var objSizes = [0.2, 0.17, 0.07, 0.2];
-//var objSizes = [0.2, 0.17, 0.07];
+var objSizes = [0.2, 0.17, 0.07, 0.2];
+
 
 // Colors for each celestial body (hexadecimal format)
-// original 
- var objColors = [0x0066ff, 0xcc3333, 0xff0000, 0xffffff];
-//var objColors = [0x0066ff, 0xcc3333, 0xff0000];
+var objColors = [0x0066ff, 0xcc3333, 0xff0000, 0xffffff];
+
 
 // Array to store trajectory information for heavenly bodies
 var heavenlyBodies = [];
@@ -34,6 +32,9 @@ function init() {
     0.1,
     1000
   );
+
+  lookAtVector = new THREE.Vector3(0,0,0);
+  camera.lookAt(lookAtVector);
 
   // Add trackball controls to enable interactive scene manipulation (rotate, zoom, pan)
   controls = new THREE.TrackballControls(camera);
@@ -60,21 +61,12 @@ function init() {
   var j = 0;
 
 // Create the Sun (a yellow sphere) and add it to the scene
-//   // original
-//   var geometry = new THREE.SphereGeometry(0.6, 16, 16);
-//   var material = new THREE.MeshBasicMaterial({
-//     color: 0xffff00,
-//     wireframe: false,
-//   });
-//   sphere = new THREE.Mesh(geometry, material);
-//   scene.add(sphere);
-
-// Create the EARTH (a blue sphere) and add it to the scene
   var geometry = new THREE.SphereGeometry(0.6, 16, 16);
   var material = new THREE.MeshBasicMaterial({
-    color: 0x34aeeb,
+    color: 0xffff00,
     wireframe: false,
   });
+
   sphere = new THREE.Mesh(geometry, material);
   scene.add(sphere);
 
@@ -108,10 +100,26 @@ function render() {
   // Continuously call render for each frame
   requestAnimationFrame(render);
 
+  var hbTAnomoly = heavenlyBodies[nbrOfPlanet].trueAnomoly ;
+  currentPosition = heavenlyBodies[nbrOfPlanet].propagate(hbTAnomoly) ;  // Determine the current position.  
+  
+
+  var x = currentPosition[0] ;
+  var y = currentPosition[1] ;
+  var z = currentPosition[2] ;
+  var hBName = heavenlyBodies[nbrOfPlanet].name;  
+
+  lookAtVector.set(x,y,z);
+
+  camera.lookAt(lookAtVector); // Set look at coordinate like this
+
+  //console.log(hBName, currentPosition);
+
   // Render the scene from the perspective of the camera
   renderer.render(scene, camera);
 }
 
+var i = 0;
 // ------------------------
 // FUNC ANIMATE
 // ------------------------
@@ -123,6 +131,7 @@ function animate() {
   controls.update();
   // Update object positions
   updatePosition();
+
 }
 
 // ------------------------
