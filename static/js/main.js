@@ -36,6 +36,7 @@ var planetDetails = [
 // ------------------------
 
 var camera, controls, scene, renderer, cube, sphere, line, celestialBody, lookAtVector;
+var moon;
 
 var nbrOfPlanet = 1;
 
@@ -55,7 +56,8 @@ var objSizes = [0.2, 0.17, 0.07, 0.2];
 
 
 // Colors for each celestial body (hexadecimal format)
-var objColors = [0x0066ff, 0xcc3333, 0xff0000, 0xffffff];
+//var objColors = [0x0066ff, 0xcc3333, 0xff0000, 0xffffff];
+var objColors = [0xffffff, 0xffffff, 0xffffff, 0xffffff];
 
 
 // Array to store trajectory information for heavenly bodies
@@ -95,7 +97,7 @@ function init() {
 
   // Create the WebGL renderer and set its size
   renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+  renderer.setSize(window.innerWidth / 1.5, window.innerHeight / 1.5);
 
   // Append the renderer's DOM element to the document (so it appears on the webpage)
 
@@ -109,7 +111,8 @@ function init() {
   var geometry = new THREE.SphereGeometry(0.6, 16, 16);
   var material = new THREE.MeshBasicMaterial({
     map: textureLoader.load("static/img/sun_surface.jpg"),  // Apply the texture
-    color: 0xffff00,
+    //color: 0xffff00,
+    color: 0xfffff0,
     wireframe: false,
   });
 
@@ -137,8 +140,41 @@ function init() {
     j++;
   }
 
+  // Create the Moon's geometry and material
+  var moonGeometry = new THREE.SphereGeometry(0.05, 16, 16); // Adjust size of the Moon (smaller than Earth)
+  var moonMaterial = new THREE.MeshBasicMaterial({
+    map: textureLoader.load("static/img/moon_surface.jpg"),  // Apply the texture
+    color: 0xfffff0,  // Light gray color for the Moon
+    wireframe: false
+  });
+
+  moon = new THREE.Mesh(moonGeometry, moonMaterial);
+
+  moon.position.set(0.7, 0, 0);  // Example distance from the Earth
+  scene.add(moon);
+
   // Set the camera's initial position
   camera.position.z = 5;
+}
+
+var moonOrbitRadius = 0.3; // Adjust orbit radius (distance from Earth)
+var moonSpeed = 10; // Adjust speed of orbit
+
+function animateMoon() {
+  // Continuously update the Moon's position to create an orbit
+  var time = Date.now() * 0.001; // Incremental time for animation
+
+  var hbTAnomoly = heavenlyBodies[0].trueAnomoly;
+  currentPosition = heavenlyBodies[0].propagate(hbTAnomoly) ;  // Determine the current position.  
+
+  var x = currentPosition[0] ;
+  var y = currentPosition[1] ;
+  var z = currentPosition[2] ;
+  
+  moon.position.y = y;
+
+  moon.position.x = x + moonOrbitRadius * Math.cos(time * moonSpeed);
+  moon.position.z = z + moonOrbitRadius * Math.sin(time * moonSpeed);  
 }
 
 // ------------------------
@@ -175,7 +211,6 @@ function render() {
   renderer.render(scene, camera);
 }
 
-var i = 0;
 // ------------------------
 // FUNC ANIMATE
 // ------------------------
@@ -187,7 +222,8 @@ function animate() {
   controls.update();
   // Update object positions
   updatePosition();
-
+  // Call the moon animation
+  animateMoon();  
 }
 
 // ------------------------
