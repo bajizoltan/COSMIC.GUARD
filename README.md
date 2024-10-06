@@ -4,12 +4,13 @@ NASA Space Apps 2024 @ Budapest
 
 # Application Demo
 Challenge: Create an Orrery Web App that Displays Near-Earth Objects
+Status : Under development
 
 # Sources
 NASA Resources: 
-https://github.com/nasa/mission-viz
-https://ssd.jpl.nasa.gov/planets/approx_pos.html
-https://www.solarsystemscope.com/textures/
+- https://github.com/nasa/mission-viz
+- https://ssd.jpl.nasa.gov/planets/approx_pos.html
+- https://www.solarsystemscope.com/textures/
 
 # Feaures
 ## Solar system simulator 
