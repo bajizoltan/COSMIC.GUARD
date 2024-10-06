@@ -1,3 +1,36 @@
+var planetDetails = [
+  {
+    name: "Earth",
+    diameter: "12,742 km",
+    distanceFromSun: "149.6 million km",
+    description: "Earth is the third planet from the Sun and the only astronomical object known to harbor life."
+  },
+  {
+    name: "Mars",
+    diameter: "6,779 km",
+    distanceFromSun: "227.9 million km",
+    description: "Mars is the fourth planet from the Sun and is often called the 'Red Planet' due to its reddish appearance."
+  },
+  {
+    name: "Mercury",
+    diameter: "4,880 km",
+    distanceFromSun: "57.9 million km",
+    description: "Mercury is the smallest planet in our solar system and the closest to the Sun."
+  },
+  {
+    name: "Venus",
+    diameter: "12,104 km",
+    distanceFromSun: "108.2 million km",
+    description: "Venus is the second planet from the Sun and has a thick, toxic atmosphere."
+  },
+  {
+    name: "Sun",
+    diameter: "1.39 million km",
+    distanceFromSun: "0 km", 
+    description: "The Sun is the star at the center of our solar system. It is a nearly perfect sphere of hot plasma, providing the energy that powers life on Earth. The Sun contains 99.86% of the total mass of the solar system."
+  }
+];
+
 // ------------------------
 // GLOBAL VARS
 // ------------------------
@@ -41,7 +74,7 @@ function init() {
   controls.rotateSpeed = 1.0;
   controls.zoomSpeed = 1.2;
   controls.panSpeed = 0.8;
-  controls.noZoom = false;
+  controls.noZoom = true;
   controls.noPan = false;
   controls.staticMoving = true;
   controls.dynamicDampingFactor = 0.3;
@@ -187,24 +220,42 @@ function get_datablock() {
       heavenlyBodies.push(celestialBody);
 
       // Populate the table with data for the celestial body
-      populate_table(
-        i,
-        field.name.value,
-        field.argPerigee.value,
-        field.meanAnomoly.value,
-        field.eccentricity.value,
-        field.inclination.value,
-        field.semiMajorAxis.value,
-        field.raan.value,
-        field.sidereal.value
-      );
+      // populate_table(
+      //   i,
+      //   field.name.value,
+      //   field.argPerigee.value,
+      //   field.meanAnomoly.value,
+      //   field.eccentricity.value,
+      //   field.inclination.value,
+      //   field.semiMajorAxis.value,
+      //   field.raan.value,
+      //   field.sidereal.value
+      // );
     }
   }
 }
 
 function changePlanet(planetIndex) {
-  nbrOfPlanet = planetIndex;
-  console.log("Changed planet to: " + objNames[planetIndex]);
+    
+    if (planetIndex >= 0 && planetIndex < planetDetails.length) {
+      nbrOfPlanet = planetIndex;
+      console.log("Changed planet to: " + planetDetails[planetIndex].name);
+  
+      // Kiválasztott bolygó információinak kiírása a HTML-be
+      var planet = planetDetails[planetIndex];
+      var infoDiv = document.getElementById('planetInfo');
+      infoDiv.innerHTML = `
+        <h2>${planet.name}</h2>
+        <p><strong>Diameter:</strong> ${planet.diameter}</p>
+        <p><strong>Distance from Sun:</strong> ${planet.distanceFromSun}</p>
+        <p><strong>Description:</strong> ${planet.description}</p>
+      `;
+    } else {
+      // Ha érvénytelen az index, a Nap (utolsó elem) lesz beállítva
+      console.log("Invalid planet index: " + planetIndex + ". Defaulting to Sun.");
+      nbrOfPlanet = planetDetails.length - 1; // A Nap indexe az utolsó
+      changePlanet(nbrOfPlanet); // Hívjuk meg újra a changePlanet függvényt a Nap indexével
+    }    
 }
 
 // STEP1: Call initialization and start the animation
@@ -215,3 +266,5 @@ get_datablock();
 traceOrbits();
 // STEP4: Start the animation loop
 animate();
+
+changePlanet(5);
