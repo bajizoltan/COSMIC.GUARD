@@ -76,7 +76,7 @@ function init() {
   controls.panSpeed = 0.8;
   controls.noZoom = true;
   controls.noPan = false;
-  controls.staticMoving = true;
+  controls.staticMoving = false;
   controls.dynamicDampingFactor = 0.3;
   controls.keys = [65, 83, 68];
   controls.addEventListener("change", render);
@@ -89,11 +89,14 @@ function init() {
   renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
 
   // Append the renderer's DOM element to the document (so it appears on the webpage)
-  document.body.appendChild(renderer.domElement);
+
+  var container = document.getElementById('scene-container');
+  container.appendChild(renderer.domElement);  
+  //document.body.appendChild(renderer.domElement);
 
   var j = 0;
 
-// Create the Sun (a yellow sphere) and add it to the scene
+  // Create the Sun (a yellow sphere) and add it to the scene
   var geometry = new THREE.SphereGeometry(0.6, 16, 16);
   var material = new THREE.MeshBasicMaterial({
     color: 0xffff00,

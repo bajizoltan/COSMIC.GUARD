@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Ontology-driven Orrery</title>
+   
     <link rel="stylesheet" href="styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jsonld/0.3.15/jsonld.js"></script>
@@ -264,10 +266,22 @@
       </tr>
     </table>
     -->
-    <div id="planetInfo"></div>
+    <div></div>
+    <div class="container-sm">
+      <div class="grid">
+      <div class="col">
+        <div id="scene-container"></div>
+      </div>
+      <div class="col">
+        <div id="planetInfo" class="col-md-6 alert alert-danger" role="alert"></div>
+      </div>
+    </div>
+    </div>
+    
+    
     <script src="main.js"></script>
-    <div id="buttonContainer">
-      <button id="planetButton" onclick="changePlanet(9)">Set Sun</button>
+    <div class="btn-group" role="group">
+      <button id="planetButton" class="btn btn-warning" onclick="changePlanet(9)">Set Sun</button>
       <button id="planetButton" onclick="changePlanet(2)">Set Mercury</button>
       <button id="planetButton" onclick="changePlanet(3)">Set Venus</button>
       <button id="planetButton" onclick="changePlanet(0)">Set Earth</button>
@@ -275,6 +289,6 @@
     </div>
 
     
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
   </body>
 </html>
