@@ -1,6 +1,6 @@
 
 body {
-    background: url('static/img/university.png') no-repeat center center fixed;
+    background: url('../img/university.png') no-repeat center center fixed;
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);    

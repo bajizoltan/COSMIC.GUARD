@@ -146,39 +146,39 @@ body {
 }
 
 .sun {
-  background-image: url('../../../static/img/sun_surface.jpg');
+  background-image: url('../img/sun_surface.jpg');
 }
 
 .mercury {
-  background-image: url('../../../static/img/mercury_surface.jpg');
+  background-image: url('../img/mercury_surface.jpg');
 }
 
 .venus {
-  background-image: url('../../../static/img/venus_surface.jpg');
+  background-image: url('../img/venus_surface.jpg');
 }
 
 .earth {
-  background-image: url('../../../static/img/earth_surface.jpg');
+  background-image: url('../img/earth_surface.jpg');
 }
 
 .mars {
-  background-image: url('../../../static/img/mars_surface.jpg');
+  background-image: url('../img/mars_surface.jpg');
 }
 
 .jupiter {
-  background-image: url('../../../static/img/jupiter_surface.jpg');
+  background-image: url('../img/jupiter_surface.jpg');
 }
 
 .saturn {
-  background-image: url('../../../static/img/saturn_surface.jpg');
+  background-image: url('../img/saturn_surface.jpg');
 }
 
 .uranus {
-  background-image: url('../../../static/img/uranus_surface.jpg');
+  background-image: url('../img/uranus_surface.jpg');
 }
 
 .neptune {
-  background-image: url('../../../static/img/neptune_surface.jpg');
+  background-image: url('../img/neptune_surface.jpg');
 }
 
 .footer {
