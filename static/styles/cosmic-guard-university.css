@@ -18,14 +18,15 @@ body {
 }
 
 .course-btn {
-    background: rgba(0, 200, 255, 0.7);
+    display: block; /* Gombok blokk elemek lesznek */
+    width: 100%; /* Teljes szélesség */
+    margin-bottom: 10px; /* Térköz a gombok között */
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
     color: white;
-    padding: 1em 2em;
     text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 10px;
-    transition: background 0.3s, transform 0.3s;
-    box-shadow: 0 4px 15px rgba(0, 200, 255, 0.5);
+    border-radius: 5px;
 }
 
 .course-btn:hover {
