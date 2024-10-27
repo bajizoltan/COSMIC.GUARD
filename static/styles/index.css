@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #0e1d34, #0a0e1f);
+    color: #f0f0f0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    width: 60%;
+    z-index: 2;
+    position: relative;
+}
+
+.title {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+@media (max-width: 700px) {
+    .title {
+        font-size: 1.4em; 
+        letter-spacing: 2px;
+    }
+}
+
+#scene-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Background */
+}
+
+.start-btn {
+    background-color: #ff4500;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 2;
+    margin-top: 20px;
+    display: block;
+    margin: 0 auto;
+}
+
+.start-btn:hover {
+    background-color: #ff6347;
+}
+
+.intro-text {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-top: 30px;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    z-index: 2;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+    opacity: 1;
+}
+
+/* Logo positioning */
+.logo-container {
+    position: fixed;
+    bottom: 20px;  /* Space from the bottom */
+    left: 20px;    /* Space from the left */
+    z-index: 3;    /* Ensure the logo stays above other elements */
+}
+
+.logo {
+    width: 100px;  /* Adjust the size of the logo */
+    height: auto;
+    opacity: 0.5;  /* Set initial transparency level */
+    transition: opacity 0.5s ease; /* Smooth transition for opacity */
+}
+
+.logo-container:hover .logo {
+    opacity: 1; /* Full visibility on hover */
+}
+
+#enterBtn {
+    background-color: #ff4500;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* Make the button a block-level element */
+    margin: 20px auto; /* Center the button horizontally */
+    z-index: 2;
+    visibility:hidden;
+}
+
+#enterBtn:hover {
+    background-color: #ff6347;
+}
+
+.scrollable-content {
+    min-height: 300px; /* Minimális magasság beállítása */
+    max-height: 100px; /* Maximális magasság beállítása */
+    overflow-y: auto;  /* Görgetés engedélyezése függőlegesen, ha szükséges */    
+}
+
+@media (max-width: 700px) {
+    .scrollable-content {
+        min-height: 200px; /* Minimális magasság beállítása */
+        max-height: 100px; /* Maximális magasság beállítása */
+        overflow-y: auto;  /* Görgetés engedélyezése függőlegesen, ha szükséges */
+        overflow-x: hidden; /* Vízszintes görgetés letiltása */
+    }
+}

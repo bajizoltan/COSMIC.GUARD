@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/icon/favicon.ico" type="image/x-icon">
+    <title>Cosmic Guard University</title>
+    <link rel="stylesheet" href="../static/styles/cosmic-guard-solsysbodies.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-bar"><h2>Explore the Solar System Bodies in 3D!</h2></div>
+
+      <!-- Planet selector panel -->
+      <div class="planet-selector">
+        <!-- Scroll buttons -->
+        <button class="scroll-button scroll-up" onclick="scrollUp()">&#9650;</button>
+
+        <!-- Planet selection buttons -->
+        <div class="planet-list" id="planetList">
+          <button class="planet-btn sun" onclick="selectPlanet('sun')"></button>
+          <button class="planet-btn mercury" onclick="selectPlanet('mercury')"></button>
+          <button class="planet-btn venus" onclick="selectPlanet('venus')"></button>
+          <button class="planet-btn earth" onclick="selectPlanet('earth')"></button>
+          <button class="planet-btn mars" onclick="selectPlanet('mars')"></button>
+          <button class="planet-btn jupiter" onclick="selectPlanet('jupiter')"></button>
+          <button class="planet-btn saturn" onclick="selectPlanet('saturn')"></button>
+          <button class="planet-btn uranus" onclick="selectPlanet('uranus')"></button>
+          <button class="planet-btn neptune" onclick="selectPlanet('neptune')"></button>
+        </div>
+
+        <!-- Scroll down button -->
+        <button class="scroll-button scroll-down" onclick="scrollDown()">&#9660;</button>
+      </div>
+
+      <!-- Jobb oldali panel - Információk az égitestekről -->
+      <div class="right-panel">
+        <h3>Information</h3>
+        <p id="planetInfo">Select a planet to see more details about it.</p>
+      </div>
+
+      <!-- Three.js Canvas -->
+      <canvas id="solarSystemCanvas"></canvas>
+    
+      <footer class="footer"><a href="welcome.html" class="back-link">Vissza</a></footer>
+    </div>
+    
+    <script src="../static/js/cosmic-guard-solsysbodies.js"></script>
+  </body>
+</html>
