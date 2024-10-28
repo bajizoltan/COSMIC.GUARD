@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #333;
+    color: white;
+    transition: left 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2; /* Magasabb z-index, hogy a menü felette legyen */
+    overflow-y: scroll; /* Görgetés engedélyezése */
+
+    /* Csúszka elrejtése */
+    scrollbar-width: none; /* Firefox */   
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari és Edge */
+}
+
+.toggle-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.scroll-container {
+    overflow-y: auto;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-button {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    background-color: #555;
+}
+
+.sidebar.open + .toggle-button {
+    left: 250px; /* Igazítja a gombot a menü jobb oldalára */
+}
+
+.content-display {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background-color: rgba(244, 244, 244, 0.8); /* 80%-os átlátszóság csak a háttérre */
+    color: #333;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+    display: none;
+    z-index: 1;
+    border-radius: 8px;
+    scrollbar-width: none;
+}
+
+.content-display::-webkit-scrollbar {
+    display: none; /* Chrome, Safari és Edge */
+}
+
+.close-button {
+    position: fixed; /* A tartalomablakban marad */
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}

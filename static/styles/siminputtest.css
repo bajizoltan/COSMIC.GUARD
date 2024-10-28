@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+#game-container {
+    width: 60vw;
+    height: 60vh;
+    background-color: #111; /* Sötét szürke háttér, hogy jobban látható legyen */
+    border: 2px solid #333; /* Vékony szegély */
+    position: relative;
+}

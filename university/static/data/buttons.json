@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Sun",
+        "class": "planet-btn sun",
+        "texture": "../../static/img/sun_surface.jpg",
+        "contentFile": "content/sun.html",
+        "clickAction": "selectPlanet('sun')"
+    },
+    {
+        "name": "Mercury",
+        "class": "planet-btn mercury",
+        "texture": "../../static/img/mercury_surface.jpg",
+        "contentFile": "content/mercury.html",
+        "clickAction": "selectPlanet('mercury')"
+    },
+    {
+        "name": "Venus",
+        "class": "planet-btn venus",
+        "texture": "../../static/img/venus_surface.jpg",
+        "contentFile": "content/venus.html",
+        "clickAction": "selectPlanet('venus')"
+    },
+    {
+        "name": "Earth",
+        "class": "planet-btn earth",
+        "texture": "../../static/img/earth_surface.jpg",
+        "contentFile": "content/earth.html",
+        "clickAction": "selectPlanet('earth')"
+    },
+    {
+        "name": "Mars",
+        "class": "planet-btn mars",
+        "texture": "../../static/img/mars_surface.jpg",
+        "contentFile": "content/mars.html",
+        "clickAction": "selectPlanet('mars')"
+    },
+    {
+        "name": "Jupiter",
+        "class": "planet-btn jupiter",
+        "texture": "../../static/img/jupiter_surface.jpg",
+        "contentFile": "content/jupiter.html",
+        "clickAction": "selectPlanet('jupiter')"
+    },
+    {
+        "name": "Saturn",
+        "class": "planet-btn saturn",
+        "texture": "../../static/img/saturn_surface.jpg",
+        "contentFile": "content/saturn.html",
+        "clickAction": "selectPlanet('saturn')"
+    },
+    {
+        "name": "Uranus",
+        "class": "planet-btn uranus",
+        "texture": "../../static/img/uranus_surface.jpg",
+        "contentFile": "content/uranus.html",
+        "clickAction": "selectPlanet('uranus')"
+    },
+    {
+        "name": "Neptune",
+        "class": "planet-btn neptune",
+        "texture": "../../static/img/neptune_surface.jpg",
+        "contentFile": "content/neptune.html",
+        "clickAction": "selectPlanet('neptune')"
+    }
+]
