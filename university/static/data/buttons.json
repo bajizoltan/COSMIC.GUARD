@@ -2,7 +2,7 @@
     {
         "name": "Sun",
         "class": "planet-btn sun",
-        "texture": "../../static/img/sun_surface.jpg",
+        "texture": "/static/img/sun_surface.jpg",
         "contentFile": "content/sun.html",
         "clickAction": "selectPlanet('sun')"
     },
