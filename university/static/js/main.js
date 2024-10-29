@@ -117,9 +117,9 @@ function init() {
 
   // Add trackball controls to enable interactive scene manipulation (rotate, zoom, pan)
   controls = new THREE.TrackballControls(camera);
-  controls.rotateSpeed = 1.0;
-  controls.zoomSpeed = 2;
-  controls.panSpeed = 0.8;
+  controls.rotateSpeed = 0.5;
+  controls.zoomSpeed = 1;
+  controls.panSpeed = 0.3;
   controls.noZoom = false;
   controls.noPan = false;
   controls.staticMoving = true;
