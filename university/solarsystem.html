@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Ontology-driven Orrery</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="static/css/styles.css" />
+  </head>
+  <body>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jsonld/0.3.15/jsonld.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../static/js/OrbitalPropagator.js"></script>
+    <script src="../static/js/TrackballControls.js"></script>
+
+    <script id="OrbitOntology" type="application/ld+json">
+      {
+        "@context": {
+          "HelioCentricOrbit": "http://www.semanticweb.org/rrovetto/ontologies/2014/ssao#Helio-Centric_Orbit",
+          "CelestialEntity": "http://www.w3.org/2002/07/owl#NamedIndividual",
+          "Name": "http://www.w3.org/2001/XMLSchema#Name",
+          "name": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_name",
+          "semiMajorAxis": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_Semi-major_Axis",
+          "eccentricity": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_orbital_eccentricity",
+          "inclination": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_orbital_inclination",
+          "meanAnomoly": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_Mean_Anomaly",
+          "argPerigee": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_Argument_of_Periapsis",
+          "sidereal": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_Eccentric_Anomaly",
+          "raan": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_RAAN",
+          "double": "http://www.w3.org/2001/XMLSchema#double",
+          "decimal": "http://www.w3.org/2001/XMLSchema#decimal",
+          "graph": "@graph",
+          "type": "@type",
+          "value": "@value"
+        },
+        "graph": [
+          {
+            "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34",
+            "type": "http://www.w3.org/2002/07/owl#Ontology",
+            "http://www.w3.org/2002/07/owl#imports": {
+              "@id": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology"
+            }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Mercury_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "77.46" },
+              "sidereal": { "type": "decimal", "value": "0.240846" },
+              "meanAnomoly": { "type": "decimal", "value": "252.25" },
+              "raan": { "type": "decimal", "value": "48.33167" },
+              "semiMajorAxis": { "type": "decimal", "value": "0.38709893" },
+              "name": { "type": "Name", "value": "Mercury_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.2056306900" },
+              "inclination": { "type": "decimal", "value": "7.00487" }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Venus_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "131.77" },
+              "sidereal": { "type": "decimal", "value": "0.615" },
+              "meanAnomoly": { "type": "decimal", "value": "181.98" },
+              "raan": { "type": "decimal", "value": "76.68069" },
+              "semiMajorAxis": { "type": "decimal", "value": "0.72333199" },
+              "name": { "type": "Name", "value": "Venus_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.00677323" },
+              "inclination": { "type": "decimal", "value": "3.39471" }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Earth_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "100.47" },
+              "sidereal": { "type": "decimal", "value": "1" },
+              "meanAnomoly": { "type": "decimal", "value": "100.47" },
+              "raan": { "type": "decimal", "value": "-11.26064" },
+              "semiMajorAxis": { "type": "decimal", "value": "1.00000011" },
+              "name": { "type": "Name", "value": "Earth_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.01671022" },
+              "inclination": { "type": "decimal", "value": "0.00005" }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Mars_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "336.0408408" },
+              "sidereal": { "type": "decimal", "value": "1.881" },
+              "meanAnomoly": { "type": "decimal", "value": "355.43" },
+              "raan": { "type": "decimal", "value": "49.57854" },
+              "semiMajorAxis": { "type": "decimal", "value": "1.52366230" },
+              "name": { "type": "Name", "value": "Mars_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.0934123300" },
+              "inclination": { "type": "decimal", "value": "1.85061" }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Jupiter_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "14.75" },
+              "sidereal": { "type": "decimal", "value": "11.862" },
+              "meanAnomoly": { "type": "decimal", "value": "14.3" },
+              "raan": { "type": "decimal", "value": "100.46435" },
+              "semiMajorAxis": { "type": "decimal", "value": "5.20288700" },
+              "name": { "type": "Name", "value": "Jupiter_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.04839266" },
+              "inclination": { "type": "decimal", "value": "1.30321" }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Saturn_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "92.43" },
+              "sidereal": { "type": "decimal", "value": "29.457" },
+              "meanAnomoly": { "type": "decimal", "value": "93.19" },
+              "raan": { "type": "decimal", "value": "113.6634" },
+              "semiMajorAxis": { "type": "decimal", "value": "9.53667594" },
+              "name": { "type": "Name", "value": "Saturn_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.0565323200" },
+              "inclination": { "type": "decimal", "value": "2.48524" }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Uranus_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "73.99" },
+              "sidereal": { "type": "decimal", "value": "84.011" },
+              "meanAnomoly": { "type": "decimal", "value": "171.23" },
+              "raan": { "type": "decimal", "value": "74.00043" },
+              "semiMajorAxis": { "type": "decimal", "value": "19.18916464" },
+              "name": { "type": "Name", "value": "Uranus_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.0457285800" },
+              "inclination": { "type": "decimal", "value": "0.77300" }
+          },
+          {
+              "@id": "http://www.semanticweb.org/daoneil/ontologies/2016/7/untitled-ontology-34#Neptune_Orbit",
+              "type": ["CelestialEntity", "HelioCentricOrbit"],
+              "argPerigee": { "type": "decimal", "value": "131.78" },
+              "sidereal": { "type": "decimal", "value": "164.791" },
+              "meanAnomoly": { "type": "decimal", "value": "250.54" },
+              "raan": { "type": "decimal", "value": "131.72186" },
+              "semiMajorAxis": { "type": "decimal", "value": "30.06992276" },
+              "name": { "type": "Name", "value": "Neptune_Orbit" },
+              "eccentricity": { "type": "decimal", "value": "0.0086781900" },
+              "inclination": { "type": "decimal", "value": "1.76917" }
+          },  
+          {
+            "@id": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_Argument_of_Periapsis",
+            "http://www.semanticweb.org/rrovetto/ontologies/2014/ssao#Reference_Source": "http://farside.ph.utexas.edu/teaching/celestial/Celestial/node34.html"
+          },
+          {
+            "@id": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_Mean_Anomaly",
+            "http://www.semanticweb.org/rrovetto/ontologies/2014/ssao#Reference_Source": "http://farside.ph.utexas.edu/teaching/celestial/Celestial/node34.html",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "Mean Anomoly at Epoch"
+          },
+          {
+            "@id": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_Semi-major_Axis",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "Value in Astronomical Units"
+          },
+          {
+            "@id": "http://www.semanticweb.org/rrovetto/ontologies/2014/space-situational-awareness-ontology#has_orbital_inclination",
+            "http://www.semanticweb.org/rrovetto/ontologies/2014/ssao#Reference_Source": "http://www.met.rdg.ac.uk/~ross/Astronomy/Planets.html"
+          }
+        ]
+      }
+    </script>
+    <div class="top-bar"><h2>Our Solar System in 3D</h2></div>
+    <div></div>
+    <div id="planetary_orbits"></div>
+    <div></div>
+
+    <div class="row p-2">
+      <div class="col">
+        <div id="scene-container"></div>
+      </div>
+    </div>
+
+    <footer class="footer"><a href="index.html" class="back-link">Back to Courses</a></footer>
+    <script src="static/js/main.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

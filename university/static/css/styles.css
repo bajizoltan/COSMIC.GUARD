@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    background-color: #000033; /* Dark blue background */
+  }
+  
+  canvas {
+    width: 50%;
+    height: 50%;
+  }
+
+  .footer {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+  }
+  
+  .back-link {
+    color: white;
+    text-decoration: none;
+  }
+
+  .top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 3;
+  }
+  
